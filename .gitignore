@@ -1,0 +1,31 @@
+# Build artifacts
+tmp/
+vendor/
+ext/zxing/Makefile
+
+# C extension build artifacts
+*.o
+*.so
+*.bundle
+*.dll
+mkmf.log
+
+# Compiled gem
+*.gem
+
+# Bundler
+.bundle/
+
+# Debug symbols
+*.dSYM/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
