@@ -27,7 +27,7 @@ On macOS:
 
 ```bash
 xcode-select --install
-brew tap sagane/zxing-cpp
+brew tap skribetech/zxing-cpp
 brew install zxing-cpp
 ```
 
