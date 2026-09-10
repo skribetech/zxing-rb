@@ -11,7 +11,7 @@ class TestZxing < Minitest::Test
   end
 
   def test_version
-    assert_equal "0.1.0", Zxing::VERSION
+    assert_equal "0.2.0", Zxing::VERSION
   end
 
   def test_read_datamatrix_method_exists

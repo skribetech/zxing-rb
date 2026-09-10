@@ -1,7 +1,7 @@
-# Ruby wrapper for ZXing-CPP DataMatrix barcode reader
+# Ruby wrapper for ZXing-CPP DataMatrix and QR code reader
 # Requires compiled native extension
 require 'zxing/zxing'
 
 module Zxing
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 end
