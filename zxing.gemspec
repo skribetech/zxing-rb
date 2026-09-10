@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "zxing"
-  spec.version       = "0.1.0"
+  spec.version       = "0.2.0"
   spec.authors       = ["Sagane"]
 
   spec.summary       = "Ruby wrapper for zxing-cpp DataMatrix and QR code reader"
