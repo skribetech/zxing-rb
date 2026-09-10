@@ -3,8 +3,8 @@ Gem::Specification.new do |spec|
   spec.version       = "0.1.0"
   spec.authors       = ["Sagane"]
 
-  spec.summary       = "Ruby wrapper for zxing-cpp DataMatrix barcode reader"
-  spec.description   = "Read DataMatrix barcodes from images using the zxing-cpp library"
+  spec.summary       = "Ruby wrapper for zxing-cpp DataMatrix and QR code reader"
+  spec.description   = "Read DataMatrix and QR codes from images using the zxing-cpp library"
   spec.homepage      = "https://github.com/zxing-cpp/zxing-cpp"
   spec.required_ruby_version = ">= 3.4.0"
 

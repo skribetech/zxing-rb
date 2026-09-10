@@ -24,13 +24,13 @@ using namespace Rice;
 using Rice::detail::to_ruby;
 
 /**
- * Read first DataMatrix code from image file
+ * Read first matching code from image file
  *
  * @param path Path to image file (JPEG, PNG, BMP, etc.)
- * @return Decoded text as String, or nil if no DataMatrix found
+ * @return Decoded text as String, or nil if no matching code found
  * @raise RuntimeError if file cannot be read or image format is invalid
  */
-Object read_datamatrix(std::string path) {
+static Object read_code(const std::string& path, BarcodeFormat format, TextMode text_mode) {
     // Load image using stb_image (RGB format, 3 channels)
     int width, height, channels;
     std::unique_ptr<stbi_uc, void(*)(void*)> buffer(
@@ -49,13 +49,13 @@ Object read_datamatrix(std::string path) {
 
     // Configure reader options
     ReaderOptions options;
-    options.setFormats(BarcodeFormat::DataMatrix);  // Only DataMatrix
+    options.setFormats(format);
     options.setTryRotate(true);                     // Try 90/180/270 degrees
     options.setTryDownscale(true);                  // Try downscaled versions
-    options.setTextMode(TextMode::HRI);             // Human Readable Interpretation
+    options.setTextMode(text_mode);
 
     // Read first barcode
-    Result result = ReadBarcode(image, options);
+    auto result = ReadBarcode(image, options);
 
     // Return text if valid, nil otherwise
     if (result.isValid()) {
@@ -65,13 +65,27 @@ Object read_datamatrix(std::string path) {
     }
 }
 
+Object read_datamatrix(std::string path) {
+    return read_code(path, BarcodeFormat::DataMatrix, TextMode::HRI);
+}
+
+Object read_qrcode(std::string path) {
+    return read_code(path, BarcodeFormat::QRCode, TextMode::Plain);
+}
+
 /**
  * Ruby extension initialization
- * Defines module Zxing with method read_datamatrix
+ * Defines module Zxing with DataMatrix and QR code readers
  */
 extern "C"
 void Init_zxing() {
     Module rb_mZxing = define_module("Zxing");
+
+    rb_mZxing.define_module_function(
+        "read_qrcode",
+        &read_qrcode,
+        Arg("path")
+    );
 
     rb_mZxing.define_module_function(
         "read_datamatrix",
